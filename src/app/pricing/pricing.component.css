@@ -1,0 +1,261 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Lato:700);
+
+body {
+  font-family: "lato", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(35deg, #84fab0, #8fd3f4);
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+.wrapper-card {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px auto;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.card {
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+  flex: 0 0 30%;
+  margin: 8px;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.card.popular {
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+.card.popular .card-title h3 {
+  color: #3498db;
+  font-size: 22px;
+}
+
+.card.popular .card-price {
+  margin: 50px;
+}
+
+.card.popular .card-price h1 {
+  color: #3498db;
+  font-size: 60px;
+}
+
+.card.popular .card-action button {
+  background-color: #3498db;
+  border-radius: 80px;
+  color: #fff;
+  font-size: 17px;
+  margin-top: -15px;
+  padding: 15px;
+  height: 80px;
+}
+
+.card.popular .card-action button:hover {
+  background-color: #2386c8;
+  font-size: 23px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-ribbon {
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+  left: -10px;
+  width: 114px;
+  height: 112px;
+}
+
+.card-ribbon span {
+  position: absolute;
+  display: block;
+  width: 160px;
+  padding: 10px 0;
+  background-color: #3498db;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  text-align: center;
+  left: -35px;
+  top: 25px;
+  transform: rotate(-45deg);
+}
+
+.card-ribbon::before, .card-ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 5px solid #2980b9;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.card-ribbon::before {
+  top: 0;
+  right: 0;
+}
+
+.card-ribbon::after {
+  bottom: 0;
+  left: 0;
+}
+
+.card-title h3 {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.card-title h4 {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.card-price {
+  margin: 60px 0;
+}
+
+.card-price h1 {
+  font-size: 46px;
+}
+.custom-control.custom-switch {
+  text-align: center;
+}
+.month-span {
+  position: relative;
+  left: -67px;
+}
+label.custom-control-label {
+  position: relative;
+  right: 5px;
+}
+.custom-control-label::before {
+  width: 45px !important;
+  height: 25px;
+  border-radius: 50px !important;
+}
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+  border-color: #6ed8b6;
+}
+.custom-control-input:focus~.custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgb(62 213 165 / 25%);
+}
+.custom-control-input:active:not(:checked)~.custom-control-label::after{
+  background-color: #fff;
+}
+.custom-control-input:not(:disabled):active~.custom-control-label::before {
+  color: #fff;
+  background-color: #98f4d7;
+  border-color: #98f4d7;
+}
+.two-card .card {
+  flex: 0 0 50%;
+  
+}
+.two-card {
+  display: flex;
+  
+}
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: #3ed5a5;
+  background-color: #3ed5a5;
+}
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+  -webkit-transform: translateX(20px);
+  transform: translateX(20px);
+}
+.custom-switch .custom-control-label::after {
+  top: 2px;
+  left: calc(-3.25rem + 2px);
+  width: calc(25px - 4px);
+  height: calc(25px - 4px);
+  border-radius: 50px;
+}
+
+.custom-switch .custom-control-label::before {
+  left: -3.25rem;
+}
+.custom-control-label::before {
+  top: 0px;
+}
+.card-price h1 sup {
+  font-size: 15px;
+  display: inline-block;
+  margin-left: -20px;
+  width: 10px;
+}
+
+.card-price h1 small {
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.card-description ul {
+  display: block;
+  list-style: none;
+  margin: 30px 0;
+  padding: 0;
+}
+
+.card-description li {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  margin: 0 0 15px;
+}
+
+.card-description li::before {
+  font-family: FontAwesome;
+  content: "";
+  padding: 0 5px 0 0;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.card-action button {
+  border-radius: 30px;
+}
+
+p.month-text {
+  text-align: center;
+  margin-top: 10px;
+  color: gray;
+}
+
+@media screen and (max-width: 1200px) {
+  .card{
+    flex: 0 0 23%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .card{
+    flex: 0 0 31%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card{
+    flex: 0 0 46%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card{
+    flex: 0 0 100%;
+    margin: 20px 0px;
+  }
+}

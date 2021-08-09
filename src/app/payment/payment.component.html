@@ -1,0 +1,99 @@
+<div class="main">
+  <div class="content">
+    <div class="sap_tabs">
+      <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+        <div class="pay-tabs">
+          <h2>Select Payment Method</h2>
+          <ul class="resp-tabs-list">
+            <li class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab">
+              <img src="../../assets/images/credit-card-payment.png" class="card-img">
+              <span>Credit Card</span>
+            </li>
+            <li class="resp-tab-item" aria-controls="tab_item-1" role="tab">
+              <img src="../../assets/images/net.png" class="card-img">
+              <span>Net Banking</span>
+            </li>
+            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab">
+              <img src="../../assets/images/paypal.png" class="card-img">
+              <span>PayPal</span>
+            </li>
+            <li class="resp-tab-item" aria-controls="tab_item-3" role="tab">
+              <img src="../../assets/images/debit.png" class="card-img">
+              <span>Debit Card</span>
+            </li>
+          </ul>
+        </div>
+        <div class="resp-tabs-container">
+          <h2 class="resp-accordion resp-tab-active" role="tab" aria-controls="tab_item-0"><span
+            class="resp-arrow"></span>Credit Card</h2>
+          <div class="tab-1 resp-tab-content resp-tab-content-active" aria-labelledby="tab_item-0"
+               style="display:block">
+            <div class="payment-info">
+              <h3>Personal Information</h3>
+              <form class="pay-form">
+                <div class="tab-for">
+                  <h5>SECURITY CODE</h5>
+                  <input type="text" value="">
+                  <h5>ZIP CODE</h5>
+                  <input type="text" value="">
+                  <h3 class="main-heading-billing">Billing address:</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5>Street</h5>
+                      <input type="text" value="">
+                    </div>
+                    <div class="col-md-6">
+                      <h5>City</h5>
+                      <input type="text" value="">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5>State</h5>
+                      <input type="text" value="">
+                    </div>
+                    <div class="col-md-6">
+                      <h5>Zip</h5>
+                      <input type="text" value="">
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+              <h3 class="pay-title">Credit Card Info</h3>
+              <form class="pay-form">
+                <div class="tab-for">
+                  <h5>NAME ON CARD</h5>
+                  <input type="text" value="">
+                  <h5>CARD NUMBER</h5>
+                  <input class="pay-logo" type="text" value="0000-0000-0000-0000"  required="">
+                </div>
+                <div class="transaction">
+                  <div class="tab-form-left user-form">
+                    <h5>EXPIRATION</h5>
+                    <ul>
+                      <li>
+                        <input type="number" class="text_box" value="6" min="1">
+                      </li>
+                      <li>
+                        <input type="number" class="text_box" value="1988" min="1">
+                      </li>
+
+                    </ul>
+                  </div>
+                  <div class="tab-form-right user-form-rt">
+                    <h5>CVV NUMBER</h5>
+                    <input type="text" value="xxxx">
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <button type="button" class="dark-btn">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

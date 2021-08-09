@@ -1,0 +1,109 @@
+<div *ngIf="url!=='not-found' && url!=='dashboard' && url!=='payment' && url!=='listing' &&  url!=='add-listing' &&  url!=='add-more-packages'  && url!=='user-profile' && url!=='manage-subscription'"  >
+  <header class="header-div">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-expand-md nav-div">
+            <a class="navbar-brand" href="#"><img src="assets/images/logo.png" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#collapsibleNavbar">
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav nav-ul">
+                <li class="nav-item">
+                  <a class="nav-link"  routerLink="/"  (click)="setTitle( 'SpotLeads Home' )">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/about"  (click)="setTitle( 'About SpotLeads' )">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  routerLink="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item login" *ngIf="isUserLogin===false">
+                  <a class="nav-link" routerLink="/signin">Login</a>
+                </li>
+                <li class="nav-item signup" *ngIf="isUserLogin===false">
+                  <a class="nav-link" routerLink="/signup">Sign Up</a>
+                </li>
+                <li class="nav-item login" *ngIf="this.isUserLogin===true">
+                  <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item signup" *ngIf="this.isUserLogin===true">
+                  <a class="nav-link" (click)="signout()">Sign out</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <app-header-home *ngIf="url==''"></app-header-home>
+    <app-header-home *ngIf="url=='/'"></app-header-home>
+    <app-header-home *ngIf="url=='home'"></app-header-home>
+    <app-header-real-estate-client *ngIf="url=='for-real-estate-clients'"></app-header-real-estate-client>
+    <app-header-real-estate-agents *ngIf="url=='for-real-estate-agents'"></app-header-real-estate-agents>
+    <app-header-about *ngIf="url=='about'"></app-header-about>
+    <!--<app-header-contact *ngIf="url=='contact'"></app-header-contact>-->
+    <app-header-signin *ngIf="url=='signin'"></app-header-signin>
+    <app-header-signup *ngIf="url=='signup'"></app-header-signup>
+    <app-header-register *ngIf="url=='register'"></app-header-register>
+    <app-header-verification *ngIf="url=='verification'"></app-header-verification>
+    <app-header-listing *ngIf="url=='listing'"></app-header-listing>
+    <app-header-pricing *ngIf="url=='pricing'"></app-header-pricing>
+   <!-- <app-header-payment *ngIf="url=='payment'"></app-header-payment>-->
+  </header>
+</div>
+
+
+<div *ngIf="url==='add-more-packages' || url==='listing' || url==='dashboard' || url==='payment' || url==='add-listing' || url==='user-profile' || url==='manage-subscription'">
+<section class="dashboard-section">
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="menu-div-wrap">
+            <a href="#">
+              <img src="../../assets/images/d-logo.png" class="dashboard-logo">
+            </a>
+            <div class=" menu-dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <img src="../../assets/images/t1.png" class="profile-btn">
+              </button>
+              <div class="dropdown-menu main-dropmenu">
+                <a class="dropdown-item" routerLink="/dashboard"><img src="../../assets/images/subscription.png" class="menu-img">Dashboard</a>
+                <a class="dropdown-item" routerLink="/manage-subscription"><img src="../../assets/images/subscription.png" class="menu-img">Manage Subscription</a>
+                <a class="dropdown-item" href="#"><img src="../../assets/images/customer-service.png" class="menu-img">Contact Support</a>
+                <a class="dropdown-item"  (click)="signout()"><img src="../../assets/images/arrow.png" class="menu-img">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="profile-div">
+          <div class="profile-main">
+            <!--<img src="../../assets/images/t1.png">-->
+            <div>
+              <p class="p-name">{{pageTitle}}</p>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a >Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{pageTitle}}</li>
+                </ol>
+              </nav>
+              <!--<p style="margin-left: 20px;margin-bottom: 0;margin-top: 5px;color: white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, necessitatibus non possimus quod rem similique voluptatum. Beatae iste rerum sequi?</p>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

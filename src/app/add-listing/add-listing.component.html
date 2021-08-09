@@ -1,0 +1,328 @@
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="list-h2" *ngIf="this.editMode==true">Edit listing</h2>
+      <!-- <h2 class="list-h2" *ngIf="this.editMode==false">Upload new listing</h2> -->
+    </div> 
+    <div class="col-md-12">
+      <div class="alert alert-danger" *ngIf="allowToAddNewList==false && this.editMode==false">
+        You are not allowed to add more listing, Kindly upgrade your account.
+      </div>
+      <form class="list-form"  #myForm="ngForm"  *ngIf="allowToAddNewList==true || this.editMode==true">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+            <label>Property Pictures <small style="color:green;" *ngIf="uploadingImgStatus!=''">(Uploading..)</small></label>
+            <input type="file"
+            id="file"
+            #userPhoto
+            (change)="onFileSelected($event)"
+            name="image"
+            autocomplete="off"
+            class="form-control form-i-input"
+            />
+            </div>
+
+           </div>
+           <div class="col-md-12 img_container">
+            <img *ngFor="let image of this.uploadedFiles;" src="{{ image }}" style="width: 50px;">
+          </div>
+           <div class="col-md-12" style="display: none;">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" (change)="saveTempData()" value="fullName" name='fullname' [(ngModel)]="listingModel.fullname" #fullnameValidate="ngModel" class="form-control form-i-input" placeholder="Enter Full Name"   />
+              <div *ngIf="fullnameValidate.invalid && (fullnameValidate.dirty || fullnameValidate.touched)" class="alert alert-danger">
+                <small *ngIf="fullnameValidate.errors.required">
+                  Please enter full name
+                </small>
+               </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Full Address</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <textarea disabled="{{ editMode }}" (change)="saveTempData()" [(ngModel)]="listingModel.address.street" name='street' #StreetValidate="ngModel"  class="form-control form-i-input" placeholder="Enter Street" required></textarea>
+              <div *ngIf="StreetValidate.invalid && (StreetValidate.dirty || StreetValidate.touched)" class="alert alert-danger">
+                <small *ngIf="StreetValidate.errors.required">
+                  Please enter street
+                </small>
+               </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <input type="text"  disabled="{{ editMode }}" (change)="saveTempData()" [(ngModel)]="listingModel.address.city" name='city' #CityValidate="ngModel" class="form-control form-i-input" placeholder="Enter City" required>
+            <div *ngIf="CityValidate.invalid && (CityValidate.dirty || CityValidate.touched)" class="alert alert-danger">
+              <small *ngIf="CityValidate.errors.required">
+                Please enter city
+              </small>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text"  disabled="{{ editMode }}" (change)="saveTempData()" [(ngModel)]="listingModel.address.state" name='state' #StateValidate="ngModel" class="form-control form-i-input" placeholder="Enter State" required>
+            <div *ngIf="StateValidate.invalid && (StateValidate.dirty || StateValidate.touched)" class="alert alert-danger">
+              <small *ngIf="StateValidate.errors.required">
+                Please enter state
+              </small>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text"  disabled="{{ editMode }}" (change)="saveTempData()" [(ngModel)]="listingModel.address.unit" name='unit' #UnitValidate="ngModel" class="form-control form-i-input" placeholder="Enter Unit">
+            <div *ngIf="UnitValidate.invalid && (UnitValidate.dirty || UnitValidate.touched)" class="alert alert-danger">
+              <small *ngIf="UnitValidate.errors.required">
+                Please enter unit
+              </small>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text"  disabled="{{ editMode }}" (change)="saveTempData()" [(ngModel)]="listingModel.address.zip" name='zip' #ZcodeValidate="ngModel" class="form-control form-i-input" placeholder="Enter Zipcode" required>
+            <div *ngIf="ZcodeValidate.invalid && (ZcodeValidate.dirty || ZcodeValidate.touched)" class="alert alert-danger">
+              <small *ngIf="ZcodeValidate.errors.required">
+                Please enter zip code
+              </small>
+             </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Buying or Renting</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <ul class="nav nav-pills row i-tabs">
+              <li class="nav-item col-md-6">
+                <a class="nav-link {{  this.listingModel.renter==true ? 'active' : ''  }}" (click)="setRenter('Renting')" data-toggle="pill" href="#rent">Renting</a>
+              </li>
+              <li class="nav-item col-md-6">
+                <a class="nav-link {{  this.listingModel.renter==false ? 'active' : ''  }}" data-toggle="pill" (click)="setRenter('Buying')" href="#but">Buying</a>
+              </li>
+
+            </ul>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Commercial or Residential</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <ul class="nav nav-pills row i-tabs">
+              <li class="nav-item col-md-6">
+                <a class="nav-link {{  this.listingModel.commercial==true ? 'active' : ''  }}" (click)="setCommerical('Commercial')"  data-toggle="pill" href="#com">Commercial</a>
+              </li>
+              <li class="nav-item col-md-6">
+                <a class="nav-link  {{  this.listingModel.commercial==false ? 'active' : ''  }}" (click)="setCommerical('Residential')" data-toggle="pill" href="#res">Residential</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Property Type:</label>
+              <select (change)="saveTempData()"  [(ngModel)]="listingModel.propertyType" name='propertyType' #propertyTypeValidate="ngModel"  class="form-control i-select" required>
+                <option value="">Select</option>
+                <option value="Offices">Offices</option>
+                <option value="Retail">Retail</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Mixed use">Mixed use</option>
+                <option value="Special purpose">Special purpose</option>
+                <option value="Land">Land</option>
+              </select>
+              <div *ngIf="propertyTypeValidate.invalid && (propertyTypeValidate.dirty || propertyTypeValidate.touched)" class="alert alert-danger">
+                <small *ngIf="propertyTypeValidate.errors.required">
+                  Please enter Property Type
+                </small>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Price:</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input pattern= "[0-9,.]+" type="text" (change)="saveTempData()" [(ngModel)]="listingModel.price" name='price' #PriceValidate="ngModel" class="form-control form-i-input" placeholder="Enter Price" required>
+            <div *ngIf="PriceValidate.invalid && (PriceValidate.dirty || PriceValidate.touched)" class="alert alert-danger">
+              <small *ngIf="PriceValidate.errors.required">
+                Please enter price
+              </small>
+              <small *ngIf="PriceValidate.errors.pattern">
+                Price should be in number format
+              </small>    
+             </div>
+          </div>
+          <!-- <div class="col-md-6">
+            <input type="text" class="form-control form-i-input" placeholder="Maximum Price">
+
+          </div> -->
+
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Size:</label>
+              <select (change)="saveTempData()"  [(ngModel)]="listingModel.size" name='size' #SizeValidate="ngModel" class="form-control i-select" required>
+                <option value="">Select</option>
+                <option value="1200">Size 1200 - 1800 Sqft</option>
+                <option value="1800">Size 1800 - 2000 Sqft</option>
+                <option value="1200">Size 1200 - 1800 Sqft</option>
+                <option value="1200">Size 1200 - 1800 Sqft</option>
+              </select>
+              <div *ngIf="SizeValidate.invalid && (SizeValidate.dirty || SizeValidate.touched)" class="alert alert-danger">
+                <small *ngIf="SizeValidate.errors.required">
+                  Please enter size
+                </small>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="this.listingModel.commercial!=true">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Bedroom:</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <ul class="nav nav-pills row i-tabs">
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bedrooms==1 ? 'active' : ''  }}" (click)="setNumberofBedrooms(1)" data-toggle="pill" href="#1">1 Room</a>
+              </li>
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bedrooms==2 ? 'active' : ''  }}" (click)="setNumberofBedrooms(2)" data-toggle="pill" href="#2">2 Room</a>
+              </li>
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bedrooms==3 ? 'active' : ''  }}" (click)="setNumberofBedrooms(3)" data-toggle="pill" href="#3">3 Room</a>
+              </li>
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bedrooms==4 ? 'active' : ''  }}" (click)="setNumberofBedrooms(4)" data-toggle="pill" href="#4">4 Room</a>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+
+        <div class="row"  *ngIf="this.listingModel.commercial!=true">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Bathrooms:</label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <ul class="nav nav-pills row i-tabs">
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bathrooms==1 ? 'active' : ''  }}" (click)="setNumberofBathrooms(1)" data-toggle="pill" href="#1">1 Bathroom</a>
+              </li>
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bathrooms==2 ? 'active' : ''  }}" (click)="setNumberofBathrooms(2)" data-toggle="pill" href="#2">2 Bathroom</a>
+              </li>
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bathrooms==3 ? 'active' : ''  }}" (click)="setNumberofBathrooms(3)" data-toggle="pill" href="#3">3 Bathroom</a>
+              </li>
+              <li class="nav-item col-md-3">
+                <a class="nav-link {{  this.listingModel.bathrooms==4 ? 'active' : ''  }}" (click)="setNumberofBathrooms(4)" data-toggle="pill" href="#4">4 Bathroom</a>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+
+       
+         
+        <div class="row">
+          <div class="col-md-6" *ngIf="this.editMode===false && (this.listingModel.address.city=='' || this.listingModel.address.street=='' || this.listingModel.address.state=='' || this.listingModel.address.unit=='' || this.listingModel.address.zip=='')">
+            <div class="form-group">
+              <label>Locations</label>
+              <select (change)="saveTempData()"   multiple="true" [(ngModel)]="listingModel.location" name='location' #LocationValidate="ngModel"  class="form-control i-select" >
+                <option value="">Select</option>
+                <option value="America">America</option>
+                <option value="New york">New york</option>
+                <option value="France">France</option>
+              </select>
+              <div *ngIf="LocationValidate.invalid && (LocationValidate.dirty || LocationValidate.touched)" class="alert alert-danger">
+                <small *ngIf="LocationValidate.errors.required">
+                  Please enter Property Type
+                </small>
+               </div>
+            </div>
+          </div>
+          <div class="col-md-6"  *ngIf="this.listingModel.commercial!=true">
+            <div class="form-group">
+              <label>Amenities</label>
+              <ng-multiselect-dropdown
+                [placeholder]="'Select'"
+                [settings]="dropdownSettings"
+                [data]="dropdownList"
+                [(ngModel)]="listingModel.amenities"
+                name='amenities'
+                #AmenitiesValidate="ngModel"
+                (onSelect)="saveTempData()"
+                (onDeSelect)="saveTempData()"
+                (onSelectAll)="saveTempData()"
+                required
+              >
+              </ng-multiselect-dropdown>
+              <!--
+              <select (change)="saveTempData()"  multiple="true"  [(ngModel)]="listingModel.amenities" name='amenities' #AmenitiesValidate="ngModel"  class="form-control i-select" required>
+                <option value="">Select</option>
+                 <option value="Dog Friendly">Dog Friendly</option>
+                <option value="Cat Friendly">Cat Friendly</option>
+                <option value="Pet Friendly">Pet Friendly</option>
+                <option value="Washer / Dryer">Washer / Dryer</option>
+                <option value="Laundary in Building">Laundary in Building</option>
+                <option value="Balcony">Balcony</option>
+                <option value="Outdoor space">Outdoor space</option>
+                <option value="Dishwasher">Dishwasher</option>
+                <option value="Doorman">Doorman</option>
+                <option value="Gym">Gym</option>
+                <option value="Rooftop">Rooftop</option>
+                <option value="Elevator">Elevator</option> 
+              </select>-->
+              <div *ngIf="AmenitiesValidate.invalid && (AmenitiesValidate.dirty || AmenitiesValidate.touched)" class="alert alert-danger">
+                <small *ngIf="AmenitiesValidate.errors.required">
+                  Please enter Amenities
+                </small>
+               </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Description:</label>
+              <textarea rows="5" (change)="saveTempData()"  [(ngModel)]="listingModel.about" name='about' #AboutValidate="ngModel" class="form-control form-i-input" required></textarea>
+              <div *ngIf="AboutValidate.invalid && (AboutValidate.dirty || AboutValidate.touched)" class="alert alert-danger">
+                <small *ngIf="AboutValidate.errors.required">
+                  Please enter some description
+                </small>
+               </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="alert alert-success" *ngIf="this.successMessage!=''"> {{successMessage}} </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button *ngIf="this.editMode===false" type="button" (click)="submitForm(myForm);" [disabled]="!myForm.form.valid" class="btn btn-primary dark-btn-i">Save</button>
+            <button *ngIf="this.editMode===true" type="button" (click)="submiteditForm(myForm);" [disabled]="!myForm.form.valid" class="btn btn-primary dark-btn-i">Save</button>
+            
+            <button  type="button" (click)="goToDashbaord()" class="btn btn-primary dark-outline-btn">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

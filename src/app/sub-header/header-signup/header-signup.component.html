@@ -1,0 +1,271 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+
+      <h1 class="main-heading" style="font-size: 31px">
+        Sign Up
+      </h1>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Select type of user</label>
+          <select [(ngModel)]="user_type" (change)="typeOfUser()" name="user_type" class="form-control input-item">
+            <option value="I am here looking for a property">I am here looking for a property</option>
+            <option value="I have a property">I have a property</option>
+          </select>
+        </div>
+      </div>
+      <div class="tab-pane container active" id="client">
+
+        <span *ngIf="this.user_type=='I am here looking for a property'">
+          <div style="width: 100%;">
+            <div id="recaptcha-container"></div>
+          </div>
+          <div *ngIf="currentProcess=='captachVerifcation'">
+            <div class="input-group mb-3 mt-5 contact-div">
+              <div class="input-group-prepend">
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                  {{this.countryCode}}
+                </button>
+                <div class="dropdown-menu">
+                  <a (click)="assign_code(countryCode)" *ngFor="let countryCode of this.countryCodeList;"
+                    class="dropdown-item">{{ countryCode.code }}</a>
+
+                </div>
+              </div>
+              <input type="text" [(ngModel)]="phoneNumber" class="form-control"
+                placeholder="Please Enter Mobile Number">
+            </div>
+            <p class="alert alert-danger" *ngIf="this.serverErrorMessage!=''">{{ this.serverErrorMessage }}</p>
+            <button class="btn btn-primary" (click)="sendLoginCode()">SMS Text Login Code</button>
+          </div>
+          <div *ngIf="windowRef && windowRef.confirmationResult && currentProcess=='CodeVerification'"
+            style="width: 100%;">
+            <hr>
+            <label for="code">Enter your Verification Code Here</label><br>
+            <input type="text" name="code" [(ngModel)]="verificationCode">
+            <button class="btn btn-primary" (click)="verifyLoginCode()">Verify</button>
+          </div>
+          <div *ngIf="this.currentProcess=='verificationDone'">
+            <br>
+            <p class="alert alert-success">Verification completed</p>
+            <p>Visit our app for further screens</p>
+            <a href="https://www.apple.com/in/app-store/">https://www.apple.com/in/app-store/</a>
+          </div>
+        </span>
+      </div>
+      <div *ngIf="this.user_type=='I have a property'">
+
+        <ul class="nav nav-pills sign-tab">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#agent" (click)="change_tab('agent')">Agent</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#property_owner" (click)="change_tab('property_owner')">Property Owner</a>
+          </li>
+          <!-- <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#client" (click)="change_tab('client')">Client</a>
+        </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#real_estate_office"
+              (click)="change_tab('real_estate_office')">Real Estate Office</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#agents_under_office"
+              (click)="change_tab('agents_under_office')">Register QR code”</a>
+          </li> -->
+
+        </ul>
+
+        <!-- Tab panes -->
+
+        <div class="tab-content sign-content">
+          <div class="tab-pane container" id="agents_under_office">
+            <span *ngIf="this.userType=='agents_under_office'">
+
+              <div *ngIf="currentProcess=='captachVerifcation'">
+                <!-- <img src="../../../assets/images/qr.png" class="qr-img">
+               -->
+                <!-- <qr-scanner [debug]="false" [canvasWidth]="1080" [canvasHeight]="720" [stopAfterScan]="true"
+                  [updateTime]="500">
+                </qr-scanner> -->
+                <!-- <p>  Result: {{this.results}}</p> -->
+                <p *ngFor="let label of this.labels">
+                  {{ label }}
+                </p>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="name" class="form-control" placeholder="Full name">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="brokerage_name" class="form-control" placeholder="Brokerage Name">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="email" class="form-control" placeholder="Please Enter Email">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="password" [(ngModel)]="password" class="form-control" placeholder="Enter password">
+                </div>
+               
+
+
+                <p class="alert alert-danger" *ngIf="this.ErrorMsgAgentUnderOfficeForm!=''">{{
+                  this.ErrorMsgAgentUnderOfficeForm }}</p>
+                <button class="btn btn-primary" (click)="saveAgentUnderOffice()">Submit</button>
+              </div>
+
+              <div *ngIf="this.currentProcess=='verificationDone'">
+                <br>
+                <p class="alert alert-success">Registration completed</p>
+              </div>
+            </span>
+          </div>
+
+
+          <div class="tab-pane container active" id="agent">
+            <span *ngIf="this.userType=='agent'">
+
+              <div *ngIf="currentProcess=='captachVerifcation'">
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="name" class="form-control" placeholder="Full Name">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="brokerage_name" class="form-control" placeholder="Brokerage">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="email" class="form-control" placeholder="Please Enter Email">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="password" [(ngModel)]="password" class="form-control" placeholder="Enter password">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" #numberOfListing="ngModel" [(ngModel)]="number_of_listng" pattern="[0-9]+"
+                    class="form-control" placeholder="How many listing you want to upload">
+                </div>
+                <div *ngIf="numberOfListing.invalid && (numberOfListing.dirty || numberOfListing.touched)"
+                  class="alert alert-warning">
+                  <div *ngIf="numberOfListing.errors.pattern">
+                    Number of listing should be in number format.
+                  </div>
+                </div>
+                
+
+                <p class="alert alert-danger" *ngIf="this.ErrorMsgAgentForm!=''">{{ this.ErrorMsgAgentForm }}</p>
+                <button class="btn btn-primary" (click)="saveAgent()">Continue to Payment</button>
+              </div>
+
+              <div *ngIf="this.currentProcess=='verificationDone'">
+                <br>
+                <p class="alert alert-success">Registration completed</p>
+              </div>
+            </span>
+            <!-- <img src="../../../assets/images/qr.png" class="qr-img"> -->
+          </div>
+
+
+
+
+
+          <div class="tab-pane container fade " id="real_estate_office">
+
+            <span *ngIf="this.userType=='real_estate_office'">
+
+              <div *ngIf="currentProcess=='captachVerifcation'">
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="name" class="form-control" placeholder="Full name">
+                </div>
+                
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="name_real_estate_office" class="form-control" placeholder="Name of Real Estate Office">
+                </div>
+
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="email" class="form-control" placeholder="Please Enter Email">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="password" [(ngModel)]="password" class="form-control" placeholder="Enter password">
+                </div>
+
+                <!-- <div class="input-group mb-3 mt-5 contact-div">
+
+                  <select type="text" [(ngModel)]="brokerage_name" class="form-control"
+                    placeholder="select your brokerage">
+                    <option value="Brokerage 1">Brokerage 1</option>
+                    <option value="Brokerage 2">Brokerage 2</option>
+                  </select>
+                </div> -->
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" #numberOfAgents="ngModel" pattern="[0-9]+" [(ngModel)]="number_of_agents"
+                    class="form-control" placeholder="How many agents in your office">
+                </div>
+                <div *ngIf="numberOfAgents.invalid && (numberOfAgents.dirty || numberOfAgents.touched)"
+                  class="alert alert-warning">
+                  <div *ngIf="numberOfAgents.errors.pattern">
+                    Number of Agents should be in number format.
+                  </div>
+                </div>
+               
+                <p class="alert alert-danger" *ngIf="this.ErrorMsgBrokerForm!=''">{{ this.ErrorMsgBrokerForm }}</p>
+                <button class="btn btn-primary" [disabled]="numberOfAgents.invalid"
+                  (click)="saveRealEstateOffice()">Continue to Payment</button>
+              </div>
+
+              <div *ngIf="this.currentProcess=='verificationDone'">
+                <br>
+                <p class="alert alert-success">Registration completed</p>
+              </div>
+            </span>
+          </div>
+
+          <div class="tab-pane container fade " id="property_owner">
+
+            <span *ngIf="this.userType=='property_owner'">
+
+              <div *ngIf="currentProcess=='captachVerifcation'">
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="name" class="form-control" placeholder="Full name">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" [(ngModel)]="email" class="form-control" placeholder="Please Enter Email">
+                </div>
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="password" [(ngModel)]="password" class="form-control" placeholder="Enter password">
+                </div>
+                
+                <div class="input-group mb-3 mt-5 contact-div">
+                  <input type="text" #numberOfListing="ngModel" [(ngModel)]="number_of_listng" pattern="[0-9]+"
+                    class="form-control" placeholder="How many listing you want to upload">
+                </div>
+                <div *ngIf="numberOfListing.invalid && (numberOfListing.dirty || numberOfListing.touched)"
+                  class="alert alert-warning">
+                  <div *ngIf="numberOfListing.errors.pattern">
+                    Number of listing should be in number format.
+                  </div>
+                </div>
+                <p class="alert alert-danger" *ngIf="this.ErrorMsgNonAgentForm!=''">{{ this.ErrorMsgNonAgentForm }}</p>
+                <button class="btn btn-primary" [disabled]="numberOfListing.invalid"
+                  (click)="saveNonAgent()">Continue to Payment</button>
+              </div>
+
+              <div *ngIf="this.currentProcess=='verificationDone'">
+                <br>
+                <p class="alert alert-success">Registration completed</p>
+              </div>
+            </span>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-5 mt-5">
+              <p>Existing User ? <a href="#">Sign In</a></p>
+              <!-- <button class="dark-btn">Scan QR Code</button> -->
+            </div>
+            <!-- <div class="col-md-12 mt-5">
+              <p>By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+            </div> -->
+          </div>
+        </div>
+        <!-- <div class="col-md-6">
+          <img src="../../../assets/images/mobile.png" class="side-imgs">
+        </div> -->
+      </div>
+    </div>
+  </div>

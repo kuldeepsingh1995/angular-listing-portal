@@ -1,0 +1,94 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="main-heading" style="font-size: 40px">
+        Welcome!
+      </h1>
+      <h5 class="sign-up-for">Sign In</h5>
+      <!-- <p class="sub-para">I am here for</p> -->
+      <div class="row mb-5">
+        <!-- <div class="col-md-12">
+          <div class="sign-box active">
+            <img src="../../../assets/images/signin.PNG" class="sign-img">
+            <p class="sign-h">Spots</p>
+            <p class="sign-p">Buying Or Renting Property</p>
+          </div>
+          <div class="sign-box">
+            <img src="../../../assets/images/login-img.PNG" class="sign-img">
+            <p class="sign-h">Leads</p>
+            <p class="sign-p">Selling Or Leasing Property</p>
+          </div>
+        </div> -->
+        <!-- <div class="col-md-12">
+          <div class="form-group">
+            <label>Select type of user</label>
+            <select [(ngModel)]="user_type" (change)="typeOfUser()" name="user_type" class="form-control input-item">
+                <option value="I am here looking for a property">I am here looking for a property</option>
+                <option value="I have a property">I have a property</option>
+            </select>
+          </div>
+      </div> -->
+      <!-- <span *ngIf="user_type == 'I am here looking for a property'">
+        <div class="col-md-12">
+          <p>[App Link]</p>
+        </div> -->
+        <!-- <div class="col-md-12">
+          <div class="input-group mb-3 mt-5 contact-div" >
+            <div class="input-group-prepend">
+              <button type="button" class="btn dropdown-toggle phone-dropdown" data-toggle="dropdown">
+                {{this.countryCode}}
+              </button>
+              <div class="dropdown-menu">
+                <a (click)="assign_code(countryCode)" *ngFor="let countryCode of this.countryCodeList;" class="dropdown-item">{{ countryCode.code }}</a>
+
+              </div>
+            </div>
+          <input type="text" [(ngModel)]="phone"   class="form-control" placeholder="Please Enter Mobile Number">
+        </div>
+        </div>
+        <div class="col-md-12">
+             <div id="recaptcha-container" ></div>
+             <br>
+         </div>
+         <div *ngIf="windowRef && windowRef.confirmationResult && currentProcess=='CodeVerification'"  style="width: 100%;">
+            <hr>
+          <label for="code">Enter your Verification Code Here</label><br>
+          <input type="text" name="code" [(ngModel)]="verificationCode">
+          <button class="btn btn-primary" (click)="verifyLoginCode()">Verify</button>
+        </div>
+        <div class="col-md-12">
+           <p class="alert alert-warning" *ngIf="this.emailFormErrors">{{ this.emailFormErrors }}</p>
+           <p class="alert alert-success" *ngIf="this.phoneFormSuccessMsg">{{ this.phoneFormSuccessMsg }}</p>
+
+
+          <button class="dark-btn" (click)="sendLoginCode()">Sign in</button>
+        </div>
+      </span> -->
+        <div class="col-md-12">
+          <div class="alert alert-warning" *ngIf="loginDisable">You have not any active subscription</div>
+          <!-- <h5 class="sign-up-for mt-5">Sign Up For</h5>
+          <ul class="main-number-ul">
+            <li>Non Agent</li>
+            <li>Agent</li>
+            <li>Real Estate office</li>
+            <li>Agents under Real Estate Office</li>
+          </ul> -->
+          <div class="input-group mb-3 mt-2 contact-div" >
+            <input type="text" style="border: none" [(ngModel)]="email" class="form-control" placeholder="Please Enter Email">
+          </div>
+          <div class="input-group mb-3 mt-2 contact-div" >
+            <input type="password" style="border: none" [(ngModel)]="password"   class="form-control" placeholder="Enter password">
+          </div>
+        </div>
+        <p class="alert alert-warning" *ngIf="this.emailFormErrors">{{ this.emailFormErrors }}</p>
+        <div class="col-md-12">
+          <button class="dark-btn" (click)="signWithEmail()">Sign in</button>
+        </div>
+       
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="../../../assets/images/mobile.png" class="side-imgs">
+    </div>
+  </div>
+</div>

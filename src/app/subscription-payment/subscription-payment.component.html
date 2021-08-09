@@ -1,0 +1,145 @@
+<div class="container">
+  <br />
+  <span *ngIf="paymentStatus == ''">
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-primary" *ngIf="loading">Loading..</div>
+      </div>
+    </div>
+    <br/>
+  -->
+
+    <br />
+  </span>
+  <span *ngIf="paymentStatus != ''">
+    <h4>Processing payment..</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success">Payment successfull.</div>
+      </div>
+    </div>
+    <br />
+    <br />
+  </span>
+  <div id="example-5" class="cell example example5">
+    <form method="post" (submit)="handleForm()" class="payment-form">
+      <!-- <input type="text" placeholder="Name"> -->
+      <p class="alert alert-danger" *ngIf="stripeError != ''">
+        {{ stripeError }}
+      </p>
+      <h3 class="heading_billngInformation">Billing Information</h3>
+      <div class="row">
+        
+        <div class="col-md-6">
+          <label for="example1-name">Name on card </label>
+          <input
+            id="example1-name"
+            name="name"
+            #addName="ngModel"
+            [(ngModel)]="additionalData.name"
+            type="text"
+            placeholder="Jane Doe"
+            required=""
+            autocomplete="name"
+          />
+          <div
+            *ngIf="addName.invalid && (addName.dirty || addName.touched)"
+            class="alert alert-warning"
+          >
+            <span *ngIf="addName.errors.required">Name on card is required</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="example1-name">Address</label>
+          <input
+            id="example1-name"
+            name="address"
+            #addAddress="ngModel"
+            [(ngModel)]="additionalData.address_line1"
+            type="text"
+            placeholder="Street"
+            required="true"
+            autocomplete="name"
+          />
+          <div
+            *ngIf="addAddress.invalid && (addAddress.dirty || addAddress.touched)"
+            class="alert alert-warning"
+          >
+            <span *ngIf="addAddress.errors.required">Address is required</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="example1-name">City</label>
+          <input
+            id="example1-name"
+            name="address_city"
+            #addCity="ngModel"
+            [(ngModel)]="additionalData.address_city"
+            type="text"
+            placeholder="San Francisco"
+            required="true"
+            autocomplete="name"
+          />
+          <div
+            *ngIf="addCity.invalid && (addCity.dirty || addCity.touched)"
+            class="alert alert-warning"
+          >
+            <span *ngIf="addCity.errors.required">City is required</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="example1-name">State</label>
+          <input
+            id="example1-name"
+            name="address_state"
+            #addState="ngModel"
+            [(ngModel)]="additionalData.address_state"
+            type="text"
+            placeholder="CA"
+            required="true"
+            autocomplete="name"
+          />
+          <div
+            *ngIf="addState.invalid && (addState.dirty || addState.touched)"
+            class="alert alert-warning"
+          >
+            <span *ngIf="addState.errors.required">State is required</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="example1-name">Zip code</label>
+          <input
+            id="example1-name"
+            name="address_zip"
+            #addZip="ngModel"
+            [(ngModel)]="additionalData.address_zip"
+            type="text"
+            placeholder="94170"
+            required="true"
+            autocomplete="name"
+          />
+          <div
+            *ngIf="addZip.invalid && (addZip.dirty || addZip.touched)"
+            class="alert alert-warning"
+          >
+            <span *ngIf="addZip.errors.required">Zip code is required</span>
+          </div>
+        </div>
+      </div>
+
+      <div #cardForm style="border: 1px solid gainsboro; padding: 10px"></div>
+      <button type="submit">Pay {{ chargeAmount | currency }}</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- <script
+src="https://checkout.stripe.com/checkout.js"
+class="stripe-button"
+data-key="pk_test_51IJaTjGXe5R5tBGRIpux6kKz2PS6Bund59S9AX9E0HtERL5pzPsgOghmYzA3PmcesXJr8XJ1bqTGoEXlH81BlK0j00UwJN0Nke"
+data-name="Gold Tier"
+data-description="Monthly subscription with 30 days trial"
+data-amount="2000"
+data-label="Subscribe">
+</script> -->

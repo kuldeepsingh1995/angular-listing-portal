@@ -1,0 +1,56 @@
+<div class="container" *ngIf="this.listData">
+    
+    <div class="row images_row">
+        <div class="col-md-12">
+            <div *ngIf="this.listData.images.length > 0">
+                <img *ngFor="let image of this.listData.images" src="{{ image }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="row row_styles">
+        <div class="col-md-12">
+            <h3>$ {{ this.listData.price }}</h3>
+        </div>
+    </div>
+
+    <div class="row row_styles">
+        <div class="col-md-6">
+            <h4>{{ this.listData.address.street }}, {{ this.listData.address.city }}, {{ this.listData.address.state }}, {{ this.listData.address.zip }}, {{ this.listData.address.unit }}</h4>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <p>Newyork</p>
+        </div>
+    </div>
+
+    <div class="row row_styles">
+        <div class="col-md-12">
+            Specifications: {{  listData.bedrooms }} Bedrooms, {{  listData.bathrooms }} Bathrooms, {{  listData.size }} Sq.ft
+        </div>    
+    </div>
+    <div class="row row_styles">
+        <div class="col-md-12">
+            About: {{  listData.about }} 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            Amenties: 
+            <span class="amentie_container" *ngIf="listData.amenities.length > 0">
+                <span class="amentie" *ngFor="let amentie of listData.amenities" >{{ amentie }}</span>
+            </span>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <p>Listing Agent: </p>
+            
+        </div>
+    </div>
+</div>

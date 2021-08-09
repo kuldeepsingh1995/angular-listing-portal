@@ -1,0 +1,315 @@
+<section class="pricing-section">
+    <h3 class="text-center mt-5">Subscription Plan</h3>
+    <p class="month-text">monthly or yearly for unlimited listings</p>
+    <!-- <div class="custom-control custom-switch custom-switch-lg" >
+      <label class="month-span" for="switch1">Yearly</label>
+  
+      <input
+        [(ngModel)]="plan_period_monthly"
+        type="checkbox"
+        class="custom-control-input"
+        id="switch1"
+      />
+      <label class="custom-control-label" for="switch1">Monthly</label>
+    </div> -->
+  
+    <div class="container">
+      <div class="row" >
+        <div class="col-md-5" *ngIf="showInput">
+          <div class="form-group mb-3 mt-5" >
+            <label for="">How many listing you want to upload</label>
+            <input
+              type="text"
+              #numberOfListing="ngModel"
+              [(ngModel)]="number_of_listng"
+              pattern="[0-9]+"
+              class="form-control"
+              placeholder="How many listing you want to upload"
+            />
+          </div>
+          <div
+            *ngIf="
+              numberOfListing.invalid &&
+              (numberOfListing.dirty || numberOfListing.touched)
+            "
+            class="alert alert-warning"
+          >
+            <div *ngIf="numberOfListing.errors.pattern">
+              Number of listing should be in number format.
+            </div>
+          </div>
+          <div>
+              <button class="btn btn-primary" (click)="submitSelectablePackage()">Submit</button>
+          </div>
+        </div>
+
+
+        <div class="col-md-12" *ngIf="!showInput">
+          <div class="wrapper-card" *ngIf="packages.length > 0">
+            <span [ngClass]="{'two-card': (package.package_type == 'unlimited' || package.user_type=='real_estate_office') }" *ngFor="let package of packages">
+            
+            <div class="card" *ngIf="package.user_type == 'real_estate_office'">
+              <div class="card-title">
+                  <h3>{{ package.title }}</h3>
+                  <h4 *ngIf="package.max_agent != '++'">
+                    {{ package.min_agent }} - {{ package.max_agent }} agents
+                  </h4>
+                  <h4 *ngIf="package.max_agent == '++'">
+                    {{ package.min_agent }} + agents
+                  </h4>
+                </div>
+                <!-- <div class="card-price">
+                 <h1>
+                   <sup></sup>
+                   1
+                   <small>month</small>
+                 </h1>
+               </div> -->
+                <div class="card-description">
+                  <ul>
+                    <li>
+                      ${{ package.monthly_price }}/month
+                    </li>
+                   
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="selectPlan(package, true)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+              <div class="card" *ngIf="package.user_type == 'real_estate_office'">
+                <div class="card-title">
+                    <h3>Plan 2</h3>
+                    <h4 *ngIf="package.max_agent != '++'">
+                      {{ package.min_agent }} - {{ package.max_agent }} agents
+                    </h4>
+                    <h4 *ngIf="package.max_agent == '++'">
+                      {{ package.min_agent }} + agents
+                    </h4>
+                  </div>
+                  <!-- <div class="card-price">
+                   <h1>
+                     <sup></sup>
+                     12
+                     <small>month</small>
+                   </h1>
+                 </div> -->
+                  <div class="card-description">
+                    <ul>
+                      <li>
+                        ${{ package.yearly_price }} Annually
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-action">
+                    <button
+                      type="button"
+                      (click)="selectPlan(package, false)"
+                      class="dark-btn"
+                    >
+                      Select Plan
+                    </button>
+                  </div>
+                </div>
+  
+  
+              <div class="card" *ngIf="package.user_type == 'agent' && package.package_type=='unlimited'">
+                <div class="card-title">
+                  <h3>{{ package.title }}</h3>
+                  <h4>
+                    Unlimited listing
+                  </h4>
+                </div>
+                <!-- <div class="card-price">
+                 <h1>
+                   <sup></sup>
+                   1
+                   <small>month</small>
+                 </h1>
+               </div> -->
+                <div class="card-description">
+                  <ul>
+                    <li>
+                      ${{ package.monthly_price }}/month
+                    </li>
+                    
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="selectPlan(package, true)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+              <div class="card" *ngIf="package.user_type == 'agent' && package.package_type=='unlimited'">
+                <div class="card-title">
+                  <h3>Plan 3</h3>
+                  <h4>
+                    Unlimited listing
+                  </h4>
+                </div>
+                <!-- <div class="card-price">
+                 <h1>
+                   <sup></sup>
+                   12
+                   <small>month</small>
+                 </h1>
+               </div> -->
+                <div class="card-description">
+                  <ul>
+                     
+                    <li>
+                      ${{ package.yearly_price }} Annually
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="selectPlan(package, false)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+  
+  
+              <div class="card" *ngIf="package.user_type == 'agent' && package.package_type=='selectable'">
+                <div class="card-title">
+                  <h3>{{ package.title }}</h3>
+                  <h4>
+                    Limited
+                  </h4>
+                   
+                </div>
+              
+                <div class="card-description">
+                  <ul>
+                    <!-- <li>
+                      ${{ package.monthly_price }}/month for 1st listing
+                    </li> -->
+                    <li>
+                      ${{ package.additional_listing_price }}/ additional listing
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="InputNoOfListing(package)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+              
+              <div class="card" *ngIf="package.user_type == 'property_owner' && package.package_type=='unlimited'">
+                <div class="card-title">
+                  <h3>{{ package.title }}</h3>
+                  <h4>
+                    Unlimited listing
+                  </h4>
+                </div>
+                <!-- <div class="card-price">
+                 <h1>
+                   <sup></sup>
+                   1
+                   <small>month</small>
+                 </h1>
+               </div> -->
+                <div class="card-description">
+                  <ul>
+  
+                      ${{ package.monthly_price }}/month
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="InputNoOfListing(package, true)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+  
+              <div class="card" *ngIf="package.user_type == 'property_owner' && package.package_type=='unlimited'">
+                <div class="card-title">
+                  <h3>{{ package.title }}</h3>
+                  <h4>
+                    Unlimited listing
+                  </h4>
+                </div>
+                <!-- <div class="card-price">
+                 <h1>
+                   <sup></sup>
+                   12
+                   <small>month</small>
+                 </h1>
+               </div> -->
+                <div class="card-description">
+                  <ul>
+  
+                      ${{ package.yearly_price }}/year
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="selectPlan(package, false)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+  
+              <div class="card" *ngIf="package.user_type == 'property_owner' && package.package_type=='selectable'">
+                <div class="card-title">
+                  <h3>{{ package.title }}</h3>
+                  <h4>
+                    Limited
+                  </h4>
+                   
+                </div>
+              
+                <div class="card-description">
+                  <ul>
+                    <!-- <li>
+                      ${{ package.monthly_price }}/month for 1st listing
+                    </li> -->
+                    <li>
+                      ${{ package.additional_listing_price }}/ additional listing
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <button
+                    type="button"
+                    (click)="InputNoOfListing(package)"
+                    class="dark-btn"
+                  >
+                    Select Plan
+                  </button>
+                </div>
+              </div>
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

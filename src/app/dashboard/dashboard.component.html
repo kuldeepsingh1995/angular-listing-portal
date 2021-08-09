@@ -1,0 +1,86 @@
+<br>
+<br>
+<!--<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="text-align: center;">
+      <p *ngIf="user">Welcome User Name: {{ user.name }}</p>
+      &lt;!&ndash; *ngIf="ifBalance > 0 || ifBalance=='unlimited'" &ndash;&gt;
+      <button class="dark-btn"  (click)="addMoreListing()">Buy More Listing</button>
+      <button class="dark-btn"  (click)="goToAddListingPage()" style="margin-left: 10px;">Add Listing</button>
+      <button class="dark-btn" (click)="AllListingPage()" style="margin-left: 10px;">All Listing</button>
+      <button class="dark-btn" (click)="MyListingPage()" style="margin-left: 10px;">My Listing</button>
+      <button class="dark-btn" (click)="MyProfilePage()" style="margin-left: 10px;">My Profile</button>
+      <button class="dark-btn" (click)="ManageSubscription()" style="margin-left: 10px;">Manage Subscription</button>
+      <br />
+      <br />
+    </div>
+  </div>
+</div>-->
+<div class="container">
+  <p class="button-Listing-Balance pull-right" > Listing Balance: {{ listingBalance }}</p>
+</div>
+<div class="container">
+  <div class="row w-100" >
+    <div class="col-md-12">
+      <h2 class="main-h"><p *ngIf="user">Welcome User Name: {{ user.name }}</p></h2>
+      <div class="grid">
+        <!-- <div class="grid__item" *ngIf="isLoad && hasUnlimtedPlan==false" (click)="addMoreListing()">
+          <div class="card"><img class="card__img"  style="object-fit: cover;" src="https://iconutopia.com/wp-content/uploads/2017/04/hero1.png" alt="Snowy Mountains">
+            <div class="card__content">
+              <h1 class="card__header">Buy More Listing</h1>
+            </div>
+          </div>
+        </div> -->
+        <div class="grid__item" (click)="goToAddListingPage()">
+          <div class="card bg-blue"><!-- <img class="card__img" src="https://img.icons8.com/plasticine/2x/add-file.png" alt="Desert"> -->
+            <div class="card__content">
+              <h1 class="card__header">Add Listing</h1>
+
+            </div>
+          </div>
+        </div>
+        <div class="grid__item" (click)="AllListingPage()" style="display: none;">
+          <div class="card bg-gold"><!-- <img class="card__img" src="https://img.icons8.com/bubbles/2x/list.png" alt="Canyons"> -->
+            <div class="card__content">
+              <h1 class="card__header">All Listing</h1>
+
+            </div>
+          </div>
+        </div>
+        <div class="grid__item" (click)="MyListingPage()" >
+          <div class="card bg-orange"><!-- <img class="card__img" src="https://www.getfoundquick.com/wp-content/uploads/2018/04/shutterstock_1085665955-1-scaled.jpg" alt="Snowy Mountains"> -->
+            <div class="card__content">
+              <h1 class="card__header">My Listing</h1>
+            </div>
+          </div>
+        </div>
+        <div class="grid__item" (click)="MyProfilePage()">
+          <div class="card bg-grey"><!-- <img class="card__img" src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" alt="Snowy Mountains"> -->
+            <div class="card__content">
+              <h1 class="card__header">My Profile</h1>
+            </div>
+          </div>
+        </div>
+        <div class="grid__item" (click)="ManageSubscription()">
+          <div class="card bg-green"><!-- <img class="card__img" src="https://img.icons8.com/officel/2x/cancel-subscription.png" alt="Snowy Mountains"> -->
+            <div class="card__content">
+              <h1 class="card__header">Manage Subscription</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="row barcodeContainer" *ngIf="user.user_type=='real_estate_office'">
+    <div class="col-md-12">
+        <p>Real Estate office QR code</p>
+        <ngx-qrcode
+                    [elementType]="elementType"
+                    [errorCorrectionLevel]="correctionLevel"
+                    [value]="value"
+                    cssClass="bshadow"></ngx-qrcode>
+    </div>
+</div> -->

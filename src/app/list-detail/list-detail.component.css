@@ -1,0 +1,20 @@
+.images_row{
+    margin: 10px 5px;
+    text-align: center;
+}
+.images_row img {
+    max-width: 100px;
+}
+.amentie_container{
+    text-align: left;
+}
+.amentie{
+    padding: 5px;
+    background-color: rgb(53 211 164);
+    color: white;
+    font-size: small;
+}
+
+.row_styles{
+    margin: 32px 0;
+}

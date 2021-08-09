@@ -1,0 +1,329 @@
+<section class="properties-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>{{ displayOnlyMylisting == true ? 'My' : 'All'}} Properties</h3>
+      </div>
+      <div class="col-md-12">
+        <div class="row s-row">
+          <div class="col-md-6">
+            <div class="main-action-btn">
+              <button  type="button" (click)="goToAddListingPage()" class="add-btn">Add</button>
+              <button *ngIf="displayOnlyMylisting == true && hideEdit==false" (click)="editListing()" type="button" class="edit-btn">Edit</button>
+              <button type="button" *ngIf="displayOnlyMylisting == true" (click)="deleteListing()" class="delete-btn">Delete</button>
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="displayOnlyMylisting == true">
+            <div class="main-action-btn main-action-btn-2">
+              <!-- <button *ngIf="hideRenew==false" type="button" class="renew-btn">Renew</button> -->
+              <button type="button" (click)="markAsCompleted()" class="mark-btn">Mark Complete</button>
+            </div>
+          </div>
+        </div>
+        <div class="row s-row" *ngIf="mainError!=''">
+          <div class="col-md-6">
+            <div  class="alert alert-danger">{{ mainError }}</div>
+          </div>
+        </div>
+      
+        <div class="row s-row" *ngIf="mainSuccess!=''">
+          <div class="col-md-6">
+            <div  class="alert alert-success">{{ mainSuccess }}</div>
+          </div>
+        </div>
+        
+        <div class="main-listing-table-div">
+          <table class="listing-table">
+            <tr class="table-heading">
+              <th>
+                <input *ngIf="displayOnlyMylisting == true" ids="all" type="checkbox" class="select-all" (change)="selectAll()">
+              </th>
+              <th>&nbsp;</th>
+              <th>Address</th>
+              <th>Date Uploaded</th>
+              <th>Date Expiring</th>
+            </tr>
+            <tr *ngFor="let list of this.listData | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+              <td>
+                <input *ngIf="displayOnlyMylisting == true" [(ngModel)]="customCheck[i]" [value]="customCheck[i]" (change)="selectSingle($event, list)" type="checkbox" >
+              </td>
+              <td>
+                <div class="completedTag_container">
+                  <span class="completedTag" *ngIf="list.completed==1 && displayOnlyMylisting == true">Completed</span>
+                  <img *ngIf="!list.images || list.images.length==0" src="assets/images/l.png" class="table-img">
+                  <img *ngIf="list.images && list.images.length!=0" src="{{ list.images[0] }}" class="table-img"> 
+                </div>
+                  
+                
+              </td>
+              <td>{{ list.address.street }}, {{ list.address.city }}, {{ list.address.state }}, {{ list.address.zip }}</td>
+              <td>{{ list.startingDate | date : 'MMMM dd, y' }}</td>
+              <td>N/a</td>
+            </tr>
+          
+
+          </table>
+          <div style="text-align:center;" class="pagination">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--<section class="listing-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="filter-div">
+          <div class="row">
+            <div class="col-6">
+              <label class="filter-label">Sort By</label>
+              <select (change)="change_list($event)" class="filter form-control">
+                <option value='asc'>A-Z</option>
+                <option value='desc'>Z-A</option>
+              </select>
+            </div>
+            <div class="col-6 text-right">
+              <label class="filter-label">Filter</label>
+
+              <select (change)="change_propertyType($event)" class="filter form-control">
+                <option value="">Select Property Type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Multi Family">Multi Family</option>
+                <option value="Single Family">Single Family</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="listing-div" *ngFor="let list of this.listData | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img *ngIf="!list.images || list.images.length==0" src="assets/images/l.png" class="listing-img">
+              <img *ngIf="list.images && list.images.length!=0" src="{{ list.images[0] }}" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price" (click)="viewListing(list)">${{ list.price }}</h3>
+                <p class="listing-des" (click)="viewListing(list)">
+                  {{ list.address.street }}, {{ list.address.city }}, {{ list.address.state }}, {{ list.address.zip }} </p>
+                <p class="listing-phone" (click)="viewListing(list)">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> {{ list.bathrooms }} Bath</li>
+                  <li><i class="fa fa-square"></i> {{ list.size }} Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                  <a *ngIf="this.myUid==list.uid" (click)="editListing(list)" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p *ngIf="this.listData.length==0">No data found.</p>
+
+        <div style="text-align:center;" class="pagination">
+          <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
+
+         &lt;!&ndash;<ul class="pagination justify-content-center mt-5 list-pagination">
+          <li class="page-item navigator"><a class="page-link" href="#">Back</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item navigator"><a class="page-link" href="#">Next</a></li>
+        </ul>&ndash;&gt;
+
+        &lt;!&ndash; <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l1.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l2.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l3.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> &ndash;&gt;
+        &lt;!&ndash; <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l4.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> &ndash;&gt;
+        &lt;!&ndash; <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l5.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l6.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-div">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-6">
+              <img src="assets/images/l7.png" class="listing-img">
+            </div>
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <div class="list-info">
+                <h3 class="listing-price">$500</h3>
+                <p class="listing-des">
+                  P.O. Box 283 8562 Fusce Rd.
+                  Frederick Nebraska 20620 (372) </p>
+                <p class="listing-phone">587-2335</p>
+                <ul class="amenities">
+                  <li><i class="fa fa-bed"></i> Studio</li>
+                  <li><i class="fa fa-bath"></i> Bath</li>
+                  <li><i class="fa fa-square"></i> 64 Sqft</li>
+                </ul>
+
+                <div class="action-div">
+                  <a href="#"><i class="fa fa-share-alt	" aria-hidden="true"></i></a>
+                  <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> &ndash;&gt;
+
+      </div>
+    </div>
+  </div>
+</section>-->

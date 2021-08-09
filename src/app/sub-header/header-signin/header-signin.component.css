@@ -1,0 +1,138 @@
+img.cs-img {
+  position: absolute;
+  top: 170px;
+  right: -100px;
+}
+.or-div {
+  margin-top: 50px;
+  border-top: 2px solid #e2e2e2;
+  position: relative;
+}
+h5.sign-up-for {
+  margin-top: 20px;
+}
+
+ul.main-number-ul {
+  counter-reset: section;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+ul.main-number-ul li {
+  margin-right: 25px;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+}
+/*.phone-dropdown {
+  border: 1px solid #ced4da;
+}*/
+ul.main-number-ul li:before {
+  counter-increment: section;
+  content: counter(section);
+  padding: 2px 7px;
+  font-size: 14px;
+  background: #3cd09d;
+  color: white;
+  border-radius: 50px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  position: absolute;
+  left: 0;
+}
+.or-div span {
+  position: absolute;
+  background: gainsboro;
+  text-align: center;
+  padding: 8px 9px;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  color: #1b273d;
+  font-size: 14px;
+}
+.contact-div-inner {
+  background: #36d5a5;
+  padding: 50px;
+}
+section.contact-div {
+  padding: 50px 0;
+}
+.contact-div-inner * {
+  color: white;
+}
+
+header.header-div {
+  position: relative;
+  overflow: hidden;
+}
+.sign-box.active {
+  background: #29d09d;
+  padding: 15px;
+  margin-bottom: 30px;
+  border: 1px solid #29d09d;
+
+}
+
+
+.sign-box {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 30px;
+  border: 1px solid gainsboro;
+}
+.sign-box {
+  width: auto;
+  max-width: 40%;
+  float: left;
+  margin-right: 20px;
+}
+.sign-box:hover{
+  background: #29d09d;
+  cursor: pointer;
+  border: 1px solid #29d09d;
+}
+.sign-box:hover * {
+  color: white;
+  text-align: center;
+
+}
+
+.sign-box.active * {
+  color: white;
+  text-align: center;
+}
+.sign-box * {
+
+  text-align: center;
+}
+img.sign-img {
+  display: block;
+  margin: auto;
+  width: auto;
+  max-width: 100%;
+  height: 60px;
+}
+p.sign-h {
+  font-size: 18px;
+  margin-top: 9px;
+  margin-bottom: 5px;
+}
+p.sign-p {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 100 !IMPORTANT;
+}
+@media screen and (max-width:992px){
+  .sign-box {
+    width: auto;
+    max-width: 45%;
+    float: left;
+    margin-right: 15px;
+  }
+
+}

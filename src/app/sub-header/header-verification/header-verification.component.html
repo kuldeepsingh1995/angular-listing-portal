@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+
+      <h1 class="main-heading" style="font-size: 31px">
+        Enter 4 digit code
+      </h1>
+      <p class="sub-para">Verification code has been sent by SMS to
+        +1 541-754-3010  <a href="#">Edit number</a>
+
+      </p>
+      <div class="input-group mb-3 mt-5 contact-div">
+
+        <input type="text" (input)="nextinput($event)" minlength="1" maxlength="1" class="form-control verify-code" placeholder="_">
+        <input type="text" (input)="nextinput($event)" minlength="1" maxlength="1" class="form-control verify-code" placeholder="_">
+        <input type="text" (input)="nextinput($event)" minlength="1" maxlength="1" class="form-control verify-code" placeholder="_">
+        <input type="text" (input)="nextinput($event)" minlength="1" maxlength="1" class="form-control verify-code" placeholder="_">
+      </div>
+      <div class="row">
+
+
+        <div class="col-md-12 mb-5 mt-5">
+          <p>Re-Send Code</p>
+          <button class="dark-btn">Submit</button>
+        </div>
+        <div class="col-md-12 mt-5">
+          <p>By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="../../../assets/images/mobile.png" class="side-imgs">
+    </div>
+  </div>
+</div>

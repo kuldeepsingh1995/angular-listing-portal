@@ -1,0 +1,145 @@
+img.cs-img {
+  position: absolute;
+  top: 170px;
+  right: -100px;
+}
+.contact-div-inner {
+  background: #36d5a5;
+  padding: 50px;
+}
+section.contact-div {
+  padding: 50px 0;
+}
+.contact-div-inner * {
+  color: white;
+}
+header.header-div {
+  position: relative;
+  overflow: hidden;
+}
+.contact-div-info p {
+  font-size: 14px;
+  color: gray;
+}
+.contact-div-info h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.contact-div-info * {
+  font-weight: 300 !important;
+}
+img.map-img {
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
+.contact-div-info ~ iframe {
+  width: 100%;
+  height: auto;
+}
+
+/* * {
+  box-sizing: border-box;
+} */
+form.contact-form {
+  border: 1px solid #e9ecef;
+  padding: 50px;
+  width: 100%;
+  margin: 50px 15px;
+  border-radius: 10px;
+}
+.input-item {
+  border: 1px solid #e9ecef;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 20px;
+}
+hr {
+  border: none;
+  border-top: 1px solid #e9ecef;
+}
+.div-wrapper label {
+  display: block;
+  margin-bottom: 10px;
+  color: #2a2b2d;
+  font-size: 15px;
+}
+.div-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.item {
+  flex: 0 0 48%;
+}
+.item-100 {
+  flex: 0 0 100%;
+}
+.div-wrapper-btn button {
+  background: #1b273d;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: 500;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+button.signupbtn {
+  background: #3ed5a5;
+}
+button.signupbtn {
+  background: #3ed5a5 !IMPORTANT;
+}
+.div-wrapper-btn {
+  margin-top: 20px;
+}
+section.contac-info {
+  margin-bottom: 30px;
+}
+.contact-div {
+  border: none;
+  margin: auto;
+  margin-bottom: 60px;
+}
+section.contac-info {
+  border-top: 1px solid gainsboro;
+  padding-top: 50px;
+}
+@media screen and (max-width:500px){
+  .item {
+    flex: 0 0 100%;
+  }
+  select.input-item {
+    margin-bottom: 0 !important;
+  }
+  form.contact-form {
+    padding: 30px;
+  }
+}
+@media screen and (max-width:400px){
+  form.contact-form {
+    padding: 30px 15px;
+  }
+  .div-wrapper label{
+    font-size: 14px;
+  }
+  .div-wrapper-btn button {
+    background: #1b273d;
+    border: none;
+    padding: 8px 15px;
+    color: #fff;
+    font-weight: 500;
+    margin-right: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  .input-item{
+    font-size: 15px;
+  }
+  .contact-div-inner {
+    background: #36d5a5;
+    padding: 30px;
+  }
+}

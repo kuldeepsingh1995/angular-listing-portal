@@ -1,0 +1,211 @@
+<div class="container mt-5">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-5">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+
+              <img src="{{ (spotlead_user.profileURL == '' || spotlead_user.profileURL == null) ? 'https://bootdey.com/img/Content/avatar/avatar7.png' : spotlead_user.profileURL }}" alt="Admin" class="rounded-circle" width="150">
+              <div class="mt-3 main-info-div">
+                <h4>{{ spotlead_user.name == '' ? 'N/A' : spotlead_user.name }}</h4>
+                <p class="text-secondary mb-1" *ngIf="spotlead_user.designation"> spotlead_user.designation }}</p>
+                <p class="text-muted font-size-sm">{{ spotlead_user.address == '' ? 'N/A' : spotlead_user.address }}</p>
+                <button class="dark-btn" data-toggle="modal" data-target="#myModal">Edit</button>
+
+                <button  data-toggle="modal" data-target="#changePasswordModal" class="dark-btn-outline">Change Password</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{spotlead_user.name}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{spotlead_user.email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ spotlead_user.phone == '' ? 'N/A' : spotlead_user.phone }}
+
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Mobile</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ spotlead_user.phone == '' ? 'N/A' : spotlead_user.phone }}
+              </div>
+            </div>
+            <span *ngIf="spotlead_user.user_type=='agent'">
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Brokerage</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ spotlead_user.brokerage_name == '' ? 'N/A' : spotlead_user.brokerage_name }}
+                </div>
+              </div>
+            </span>
+
+          </div>
+          
+        </div>
+        <button  type="button" (click)="goToDashbaord()" class="dark-btn" style="float: right;">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="changePasswordModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+        <button type="button" class="close modal-close-btn" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container mt-3 mb-4">
+          <div class="row">
+           
+            <div class="col-lg-12 personal-info">
+              <h3>Enter Password</h3>
+
+              <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Current Password:</label>
+                  <div class="col-lg-12">
+                    <input class="form-control" name="current_password" [(ngModel)]="current_password" type="password">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">New Password:</label>
+                  <div class="col-lg-12">
+                    <input class="form-control" name="new_password" [(ngModel)]="new_password" type="password">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Confirm Password:</label>
+                  <div class="col-lg-12">
+                    <input class="form-control" name="confirm_password" [(ngModel)]="confirm_password" type="password">
+                  </div>
+                </div>
+              
+              </form>
+              <div *ngIf="passwordErrorMsg!=''" class="alert alert-danger">{{ passwordErrorMsg }}</div>
+              <div *ngIf="passwordSuccessMsg!=''" class="alert alert-success">{{ passwordSuccessMsg }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="modal-footer">
+        <div class="form-group">
+          <button type="button" (click)="changePassowrd()" class="dark-btn">Change</button>
+          <button type="button"  class="dark-btn-outline mt-0"  data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Profile</h4>
+        <button type="button" class="close modal-close-btn" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container mt-3 mb-4">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-lg-3">
+              <div class="text-center">
+                <img src="{{ (profileURL == '' || profileURL == null) ? 'https://bootdey.com/img/Content/avatar/avatar7.png' : profileURL }}" class="avatar img-circle" alt="avatar">
+                <h6 class="p-photo">Upload a different photo... <small style="color:green;" *ngIf="uploadingImgStatus!=''">(Uploading..)</small></h6>
+                <input type="file"  (change)="onFileSelected($event)" class="form-control profile-input" style="overflow: hidden;height: auto">
+              </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-lg-9 personal-info">
+              <h3>Personal info</h3>
+
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Name</label>
+                  <div class="col-lg-12">
+                    <input class="form-control" name="name" [(ngModel)]="name" type="text" readonly="readonly">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Phone</label>
+                  <div class="col-lg-12">
+                    <input class="form-control" name="phone" [(ngModel)]="phone" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email</label>
+                  <div class="col-lg-12">
+                    <input class="form-control" name="email" [(ngModel)]="email" type="text">
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                  <label class="col-lg-3 control-label">Address:</label>
+                  <div class="col-lg-12">
+                    <textarea class="form-control" name="address" [(ngModel)]="address" type="text"></textarea>
+                  </div>
+                </div> -->
+              </form>
+              <div *ngIf="errorMsg!=''" class="alert alert-danger">{{ errorMsg }}</div>
+              <div *ngIf="successMsg!=''" class="alert alert-success">{{ successMsg }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <div class="form-group">
+          <button type="button" (click)="update_profile()" class="dark-btn">Save Changes</button>
+          <button type="button" (click)="bindInputs()" class="dark-btn-outline mt-0"  data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,436 @@
+img.cs-img {
+  position: absolute;
+  top: 170px;
+  right: -100px;
+}
+
+.dark-btn-i {
+  border: 1px solid #1B273D;
+  background: #1B273D;
+  color: #fff;
+  border-radius: 0;
+  padding: 8px 20px;
+  margin-bottom: 30px;
+  min-width: 100px;
+  margin-left: auto;
+  margin-top: 30px;
+
+}
+
+.pagination {
+  justify-content: flex-end;
+  margin-top: 10px !IMPORTANT;
+}
+
+header.header-div {
+  position: relative;
+  overflow: hidden;
+}
+
+select.filter.form-control {
+  border: none;
+  display: inline;
+  width: auto;
+  margin-bottom: 30px;
+}
+
+button.btn.btn-primary.dark-btn-i:hover {
+  background: #1b273d;
+}
+
+img.listing-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listing-div {
+  position: relative;
+  margin-bottom: 30px;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.1);
+}
+
+.list-info {
+  padding: 30px 0;
+}
+
+p.listing-des {
+  margin-bottom: 0;
+  max-width: 50%;
+}
+
+ul.amenities {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+ul.amenities li *, ul.amenities li {
+  color: #7a8088 !important;
+}
+
+ul.amenities li {
+  margin-right: 20px;
+  font-size: 15px;
+}
+
+.list-info {
+  position: relative;
+}
+
+.action-div {
+  position: absolute;
+  top: 30px;
+  right: 15px;
+}
+
+.action-div a i {
+  color: #29d09d;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.action-div a {
+  margin-right: 20px;
+}
+
+section.listing-section {
+  padding: 50px 0;
+}
+
+.list-pagination a.page-link {
+  border: none;
+  color: black;
+}
+
+.list-pagination li.active a.page-link {
+  background: none;
+  color: #36d5a5 !important;
+}
+
+li.page-item.navigator a {
+  color: #36d5a5 !important;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.menu-div-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-main {
+  display: flex;
+  align-items: center;
+}
+
+.profile-main img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3cd09d;
+  padding: 3px;
+}
+
+img.profile-btn {
+  width: auto;
+  height: 30px;
+  max-width: 30px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: "";
+  border-color: #1b273d !important;
+  border-top: .3em solid;
+  border-right: .3em solid transparent !important;
+  border-bottom: 0;
+  border-left: .3em solid transparent !important;
+}
+
+
+.profile-div {
+  padding: 30px 0 40px;
+}
+
+section.dashboard-section {
+  background: #1b273d;
+}
+
+section.properties-section {
+  padding: 40px;
+}
+
+img.table-img {
+  width: auto;
+  height: 70px;
+  max-width: 110px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  min-width: 110px;
+}
+
+table.listing-table tr:last-child td {
+  border-bottom: 0 !important;
+  padding: 10px;
+}
+
+table.listing-table input[type="checkbox"] {
+  margin: 0 10px;
+}
+
+button.renew-btn {
+  background: #1b273d;
+  color: white;
+}
+
+.main-listing-table-div {
+  margin-top: 15px;
+}
+
+button.mark-btn {
+  background: #e6e6e6;
+}
+
+table.listing-table th {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid gainsboro;
+  padding: 10px;
+}
+
+table.listing-table {
+  width: 100%;
+}
+
+.main-action-btn button {
+  border: none;
+  padding: 6px 20px;
+  margin-right: 15px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.main-listing-table-div {
+  background: white;
+  padding: 15px;
+  box-shadow: 0 12px 40px 0 rgb(0 0 0 / 10%);
+  border-radius: 5px;
+
+}
+
+.row.s-row {
+  margin: 0;
+  background: white;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.1);
+}
+
+img.menu-img {
+  width: auto;
+  height: 20px;
+  margin-right: 10px;
+}
+
+button.mark-btn {
+  margin-right: 0 !important;
+}
+
+button.add-btn {
+  background: #03A9F4;
+  color: white;
+}
+
+button.edit-btn {
+  background: #3cd09d;
+  color: white;
+}
+
+button.delete-btn {
+  background: #F44336;
+  color: white;
+}
+
+p.p-name {
+  margin-bottom: 0;
+  margin-left: 20px;
+  font-size: 25px;
+  color: #3ccf9d;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid gainsboro;
+  align-items: center;
+  background: white;
+}
+
+.menu-dropdown button {
+  background: #ffffff !important;
+  border-color: #e6e6e6 !important;
+  border-radius: 30px;
+  box-shadow: none !important;
+}
+
+.dropdown-menu.main-dropmenu {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.menu-dropdown.show {
+  position: relative;
+}
+
+.dropdown-menu.main-dropmenu a {
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.dropdown-menu.main-dropmenu.show {
+  height: auto;
+  left: -140px !IMPORTANT;
+  top: 50px !important;
+  transform: none !important;
+}
+
+table.listing-table td {
+  border-bottom: 1px solid #35d5a5;
+  padding: 10px;
+}
+
+.main-action-btn-2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*.main-listing-table-div {
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.1);
+}*/
+
+@media screen and (max-width: 992px) {
+  table.listing-table {
+    width: 1000px;
+  }
+
+  .main-listing-table-div {
+    overflow: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  button.add-btn {
+    margin-bottom: 15px;
+  }
+
+  .main-action-btn-2 {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+
+  p.listing-des {
+    margin-bottom: 0;
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  h3.listing-price {
+    font-size: 20px;
+  }
+
+  ul.amenities li {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+
+  .action-div a i {
+    color: #29d09d;
+    font-size: 17px;
+    font-weight: 100;
+  }
+
+  .action-div a {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .list-info {
+    padding: 30px;
+  }
+
+  section.properties-section {
+    padding: 30px 0;
+  }
+
+
+  button.btn.btn-primary.dark-btn-i {
+    display: block;
+    margin: 30px auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  label.filter-label {
+    font-size: 13px;
+  }
+
+  select.filter.form-control {
+    font-size: 13px;
+  }
+
+}
+
+.ActiveBox {
+  background: #35d5a5;
+  color: white;
+  padding: 2px 5px;
+  font-size: small;
+  border-radius: 4px
+}
+
+span.CancelBox {
+  padding: 7px 15px !important;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.PastDueBox {
+  background: darkred;
+  color: white;
+  padding: 2px;
+  font-size: small;
+  border-radius: 4px
+}
+
+.CancelBox {
+  background: #e20808;
+  color: white;
+  padding: 2px;
+  font-size: small;
+}
+.table-heading
+{
+  background:#35d5a5;
+}
+.listing-table
+{
+  border: solid #35d5a5 1px;
+}

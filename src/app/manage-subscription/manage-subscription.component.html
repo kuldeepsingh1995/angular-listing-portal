@@ -1,0 +1,109 @@
+<section class="properties-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Manage Subscriptions</h3>
+        </div>
+        <div class="col-md-12">
+          <div class="row s-row">
+           
+            <div class="col-md-6">
+              <div class="alert alert-warning" *ngIf="this.isDisplayCancelNotice">Subscription may take 1 to 2 minutes to be canceled</div>
+              </div>
+              
+            <div class="col-md-6">
+              <div class="main-action-btn main-action-btn-2">
+                <button type="button" *ngIf="isLoad && hasUnlimtedPlan==false" (click)="addMoreListing()"  class="mark-btn">Buy More Listing</button>
+              </div>
+            </div>
+          </div> 
+          <!-- <div class="row s-row">
+            <div class="col-md-6">
+              <div class="main-action-btn">
+                <button  type="button" (click)="goToAddListingPage()" class="add-btn">Add</button>
+                <button *ngIf="hideEdit==false" (click)="editListing()" type="button" class="edit-btn">Edit</button>
+                <button type="button" (click)="deleteListing()" class="delete-btn">Delete</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="main-action-btn main-action-btn-2">
+                <button type="button" (click)="markAsCompleted()" class="mark-btn">Mark Complete</button>
+              </div>
+            </div>
+          </div> -->
+          <div class="row s-row" *ngIf="mainError!=''">
+            <div class="col-md-6">
+              <div  class="alert alert-danger">{{ mainError }}</div>
+            </div>
+          </div>
+        
+          <div class="row s-row" *ngIf="mainSuccess!=''">
+            <div class="col-md-6">
+              <div  class="alert alert-success">{{ mainSuccess }}</div>
+            </div>
+          </div>
+          
+          <div class="main-listing-table-div">
+            <table class="listing-table">
+              <tr class="table-heading">
+                <th>
+                  ---
+                </th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Listing Allowed</th>
+                <th>Period Type</th>
+                <th>User Type</th>
+                <th>Status</th>
+                <th>Start at</th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let list of this.listData | paginate: { itemsPerPage: PER_PAGE, currentPage: page, totalItems: totalCount }; let i = index">
+                <td>
+                <!-- <input [(ngModel)]="customCheck[i]" [value]="customCheck[i]" (change)="selectSingle($event, list)" type="checkbox" > -->
+                {{i + 1}}
+                </td>
+                <td>
+                  {{list.title}}
+                </td>
+                <td>
+                    {{list.price | currency}}
+                  </td>
+                  <td>
+                    {{ list.number_of_listng }}
+                  </td>
+                  <td>
+                      {{list.period_type}}
+                  </td>
+                  <td>
+                    {{list.user_type}}
+                  </td>
+                  
+                  <td>
+                   <span class="CancelBox" *ngIf="list.status=='cancel'">Canceled</span>
+                   <span class="ActiveBox" *ngIf="list.status=='active'">Active</span>
+                   <span class="PastDueBox" *ngIf="list.status=='pastDue'">Past Due</span>
+                </td>
+
+                <td>{{timeStampToDate(list.time)}}</td>
+                <td>
+                  <span (click)="cancelSubscription(list)" class="CancelBox" *ngIf="list.status=='active'">Cancel</span>
+
+                  
+                </td>
+
+              </tr>
+            
+  
+            </table>
+            <div style="text-align:center;" class="pagination">
+              <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
